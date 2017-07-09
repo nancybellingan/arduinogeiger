@@ -1,11 +1,11 @@
-Hello from Nancy and Naiade! </n>
+Hello from Nancy and Naiade! 
 
-Here we are saving the code we used in our AMC ss 2017 project (Radiation monitoring) </n>
+Here we are saving the code we used in our AMC ss 2017 project (Radiation monitoring) 
 
-Little guideline: </n>
+Little guideline: 
 
-UNO = contains the code for Arduino Uno  </n>
+UNO = contains the code for Arduino Uno  
 
-WIFI = contains the code for the ESP8266  </n>
+WIFI = contains the code for the ESP8266  
 
 the schematic of the project :https://puu.sh/wFkuQ/de729ffd19.png 
