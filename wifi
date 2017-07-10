@@ -60,6 +60,8 @@ Serial.println(CPM);
     String postStr = apiKey;
     postStr +="&field1=";
     postStr += String(CPM);
+    postStr +="&fiel2=";
+    postStr += String(CPM);
     postStr +="&field3=";
     postStr += String(SV); 
     postStr +="&field4=";
