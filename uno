@@ -1,4 +1,6 @@
 #include <SoftwareSerial.h>
+//we could have removed value1,value2 and leave only CPM to print, but for different reasons we first tried value1,value2 solution
+//it didn't work, so we proceed with printing but left the older values. we didn't want to remove last day to avoid functioning problems
 
 SoftwareSerial mySerial= SoftwareSerial(10, 11); // RX, TX
  
