@@ -1,10 +1,12 @@
 #include <ESP8266WiFi.h>
 
+//in this version we comment value1,2, we just leave cpm and sieverts
+
 long address = 0;   //later on for our own IP address
 const char* ssid     = "FabLab2";   //wifi details
 const char* password = "FabLabKaL!";
-long Value1=0;        //variables needed for the data
-long Value2=0;
+//long Value1=0;        //variables needed for the data
+//long Value2=0;
 long CPM=0;
 String apiKey = "UX3BY43T1Y9DQYH9"; //api write key
 float SV = 0;
@@ -43,21 +45,22 @@ void loop(){
 //write code to establish connection with arduino
   if (Serial.available()){ 
     Serial.println("getting data...");
-    Value1= Serial.parseInt();
-    Value2= Serial.parseInt();
+    CPM=Serial.parseInt();
+    //Value1= Serial.parseInt();
+    //Value2= Serial.parseInt();
   
-  CPM = ( Value2*256 ) + Value1;
-  SV = CPM*0.0057;
-  SVY = SV*8.766;
+  //CPM = ( Value2*256 ) + Value1;
+  SV = CPM*0.0057;   //conversion factor for this geiger tube (no proper calibration possible
+  SVY = SV*8.766;    //just mathematical factor to go from microSv/h to yearly exposure mSv/h (also change from milli to micro considered)
 //send cpm to serial monitor
-Serial.println("value1,value2");
-Serial.println(Value1);
-Serial.println(Value2);
+//Serial.println("value1,value2");
+//Serial.println(Value1);
+//Serial.println(Value2);
 Serial.println("CPM value is");
 Serial.println(CPM);
 //send data to website
   if (client.connect(server,80)) { // "184.106.153.149" or api.thingspeak.com
-    String postStr = apiKey;
+    String postStr = apiKey;  //string to send, containing apikey, fields to update with which parameters
     postStr +="&field1=";
     postStr += String(CPM);
     postStr +="&fiel2=";
@@ -68,7 +71,7 @@ Serial.println(CPM);
     postStr += String(SVY); 
     postStr += "\r\n\r\n";
 
-    client.print("POST /update HTTP/1.1\n");
+    client.print("POST /update HTTP/1.1\n");  //thingspeak protocol
     client.print("Host: api.thingspeak.com\n");
     client.print("Connection: close\n");
     client.print("X-THINGSPEAKAPIKEY: "+apiKey+"\n");
@@ -82,8 +85,8 @@ Serial.println(CPM);
   }
   client.stop();  //close connection with website
 }
-  Value1=0; //reset values
-  Value2=0;
+  //Value1=0; //reset values
+  //Value2=0;
   CPM=0;
   Serial.println("Waiting...");
   delay(5000); //maybe reduce delay to 10 seconds if i put the loop in standby while waiting for communication in any case (will fill up alone the gap of time)
